@@ -1,0 +1,67 @@
+{
+  "title": "Koi Pond",
+  "type": "web",
+  "file": "index.html",
+  "contentrating": "Everyone",
+  "preview": "preview.jpg",
+  "description": "An interactive, highly aesthetic Koi Pond. Move your mouse to create ripples and click to feed the fish!",
+  "general": {
+    "properties": {
+      "fishCount": {
+        "text": "Number of Koi",
+        "type": "slider",
+        "value": 15,
+        "min": 5,
+        "max": 50
+      },
+      "waterHue": {
+        "text": "Water Color Hue",
+        "type": "slider",
+        "value": 195,
+        "min": 0,
+        "max": 360
+      },
+      "fishSpeed": {
+        "text": "Fish Speed Multiplier",
+        "type": "slider",
+        "value": 1.0,
+        "min": 0.5,
+        "max": 3.0
+      },
+      "enableCaustics": {
+        "text": "Enable Light Caustics",
+        "type": "bool",
+        "value": true
+      },
+      "enableFeeding": {
+        "text": "Enable Feeding on Click",
+        "type": "bool",
+        "value": true
+      },
+      "fishTheme": {
+        "text": "Fish Color Theme",
+        "type": "combo",
+        "value": 0,
+        "options": [
+          {"label": "Traditional", "value": 0},
+          {"label": "Neon", "value": 1},
+          {"label": "Monochrome", "value": 2}
+        ]
+      },
+      "fishSize": {
+        "text": "Fish Size Multiplier",
+        "type": "slider",
+        "value": 1.0,
+        "min": 0.5,
+        "max": 3.0
+      },
+      "rippleStrength": {
+        "text": "Ripple Strength Multiplier",
+        "type": "slider",
+        "value": 1.0,
+        "min": 0.1,
+        "max": 5.0
+      }
+    }
+  }
+}
