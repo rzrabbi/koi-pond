@@ -38,6 +38,11 @@
         "type": "bool",
         "value": true
       },
+      "shyFish": {
+        "text": "Fish Avoid Cursor",
+        "type": "bool",
+        "value": true
+      },
       "fishTheme": {
         "text": "Fish Color Theme",
         "type": "combo",

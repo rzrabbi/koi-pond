@@ -7,6 +7,7 @@ let config = {
     fishSpeed: 1.0,
     enableCaustics: true,
     enableFeeding: true,
+    shyFish: true,
     fishTheme: 0,
     fishSize: 1.0,
     rippleStrength: 1.0
@@ -61,6 +62,9 @@ window.wallpaperPropertyListener = {
         }
         if (properties.enableFeeding !== undefined) {
             config.enableFeeding = properties.enableFeeding.value;
+        }
+        if (properties.shyFish !== undefined) {
+            config.shyFish = properties.shyFish.value;
         }
         if (properties.fishTheme !== undefined) {
             config.fishTheme = properties.fishTheme.value;
@@ -128,10 +132,10 @@ class Koi {
     constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 2;
-        this.vy = (Math.random() - 0.5) * 2;
-        this.baseSpeed = 1.0 + Math.random() * 0.5;
-        this.maxForce = 0.05;
+        this.vx = (Math.random() - 0.5) * 1;
+        this.vy = (Math.random() - 0.5) * 1;
+        this.baseSpeed = 0.4 + Math.random() * 0.4;
+        this.maxForce = 0.03;
         
         this.updateColorTheme();
         this.spotColor = Math.random() > 0.5 ? '#222' : '#fff'; 
@@ -170,27 +174,50 @@ class Koi {
 
         let ax = 0, ay = 0;
         let effectiveBaseSpeed = this.baseSpeed * config.fishSpeed;
+        let avoidForceApplied = false;
 
         if (target && minDist < 300) {
             let truedirX = target.x - this.x;
             let truedirY = target.y - this.y;
             let dirLen = Math.sqrt(truedirX * truedirX + truedirY * truedirY);
-            let desiredX = (truedirX / dirLen) * effectiveBaseSpeed * 2;
-            let desiredY = (truedirY / dirLen) * effectiveBaseSpeed * 2;
-            
-            ax = (desiredX - this.vx) * this.maxForce * 2;
-            ay = (desiredY - this.vy) * this.maxForce * 2;
+            if (dirLen > 0) {
+                let desiredX = (truedirX / dirLen) * effectiveBaseSpeed * 2;
+                let desiredY = (truedirY / dirLen) * effectiveBaseSpeed * 2;
+                
+                ax = (desiredX - this.vx) * this.maxForce * 2;
+                ay = (desiredY - this.vy) * this.maxForce * 2;
+            }
             
             if (minDist < 20) {
                 foods.splice(foods.indexOf(target), 1);
                 ripples.push(new Ripple(this.x, this.y, 0.8 * config.rippleStrength));
             }
         } else {
-            let wanderAngle = (Math.random() - 0.5) * 0.5;
-            let curAngle = Math.atan2(this.vy, this.vx) + wanderAngle;
+            if (config.shyFish && mouse.active) {
+                let dMouse = distance(this, mouse);
+                if (dMouse < 200) {
+                    let avoidX = this.x - mouse.x;
+                    let avoidY = this.y - mouse.y;
+                    let avoidLen = Math.sqrt(avoidX * avoidX + avoidY * avoidY);
+                    
+                    if (avoidLen > 0) {
+                        let desiredX = (avoidX / avoidLen) * effectiveBaseSpeed * 2.5;
+                        let desiredY = (avoidY / avoidLen) * effectiveBaseSpeed * 2.5;
+                        
+                        ax = (desiredX - this.vx) * this.maxForce * 3;
+                        ay = (desiredY - this.vy) * this.maxForce * 3;
+                        avoidForceApplied = true;
+                    }
+                }
+            }
             
-            this.vx = Math.cos(curAngle) * effectiveBaseSpeed;
-            this.vy = Math.sin(curAngle) * effectiveBaseSpeed;
+            if (!avoidForceApplied) {
+                let wanderAngle = (Math.random() - 0.5) * 0.5;
+                let curAngle = Math.atan2(this.vy, this.vx) + wanderAngle;
+                
+                this.vx = Math.cos(curAngle) * effectiveBaseSpeed;
+                this.vy = Math.sin(curAngle) * effectiveBaseSpeed;
+            }
         }
 
         let margin = 100;
@@ -205,7 +232,14 @@ class Koi {
 
         let speedSquared = this.vx * this.vx + this.vy * this.vy;
         let cSpeed = Math.sqrt(speedSquared);
-        let currentMax = target ? effectiveBaseSpeed * 2 : effectiveBaseSpeed;
+        
+        let currentMax = effectiveBaseSpeed;
+        if (target && minDist < 300) {
+            currentMax = effectiveBaseSpeed * 2;
+        } else if (avoidForceApplied) {
+            currentMax = effectiveBaseSpeed * 2.5;
+        }
+        
         if (cSpeed > currentMax) {
             this.vx = (this.vx / cSpeed) * currentMax;
             this.vy = (this.vy / cSpeed) * currentMax;
@@ -326,7 +360,7 @@ syncKois();
 function drawCaustics() {
     ctx.globalCompositeOperation = 'overlay';
     ctx.fillStyle = 'rgba(255,255,255,0.03)';
-    let time = Date.now() * 0.001;
+    let time = Date.now() * 0.0003 * config.fishSpeed;
     for (let i = 0; i < 5; i++) {
         ctx.beginPath();
         let lx = (Math.sin(time + i) * 200) + width / 2;

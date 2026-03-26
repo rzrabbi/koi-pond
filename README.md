@@ -10,16 +10,17 @@ An interactive, highly aesthetic Koi Pond. Move your mouse to create ripples and
 
 ## 🌟 Features
 
-- **Interactive Environment:** Move your cursor over the water to create dynamic mathematical ripples.
-- **Feed the Koi:** Click anywhere in the pond to drop food. The fish will intelligently seek it out!
-- **Procedural Animation:** Fish are drawn and animated procedurally using segment-based kinematics for incredibly realistic movement.
-- **Aesthetic Caustics:** Beautiful, procedurally generated light caustics overlay the pond.
-- **Highly Customizable:** Fully integrated with Wallpaper Engine properties:
-  - Tweak Koi count, speed, and size.
-  - Adjust the water color hue to match your setup.
-  - Change fish themes (_Traditional, Neon, Monochrome_).
-  - Toggle caustics and feeding.
-  - Control your ripple strength.
+- **Interactive Environment:** Move your cursor to create dynamic ripples.
+- **Feed the Koi:** Click to drop food for the fish to seek out.
+- **Shy Fish:** Fish naturally scatter and avoid your cursor.
+- **Procedural Animation:** Realistic segment-based fish movement.
+- **Aesthetic Caustics:** Procedural light patterns synced to the water and fish.
+- **Highly Customizable:** Adjust Wallpaper Engine properties:
+  - Koi count, speed, and size
+  - Water color hue
+  - Fish color themes (Traditional, Neon, Monochrome)
+  - Toggles for caustics, feeding, and shy fish behavior
+  - Ripple strength
 
 ## 🚀 How to Use
 
