@@ -4,7 +4,9 @@ An interactive, highly aesthetic Koi Pond. Move your mouse to create ripples and
 
 ## 🎥 Preview
 
-![Koi Pond Preview](https://i.ibb.co.com/qF0ygzk4/koi-pond-preview.gif)
+[![Live Demo Preview](https://i.ibb.co.com/qF0ygzk4/koi-pond-preview.gif)](https://rzrabbi.github.io/koi-pond/)
+
+**🖼️ [Live Demo](https://rzrabbi.github.io/koi-pond/)**
 
 ## 🌟 Features
 
