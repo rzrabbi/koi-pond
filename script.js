@@ -85,6 +85,14 @@ function distance(a, b) {
     return Math.sqrt(dx * dx + dy * dy);
 }
 
+function distanceSq(a, b) {
+    let dx = a.x - b.x;
+    let dy = a.y - b.y;
+    return dx * dx + dy * dy;
+}
+
+const FISH_BASE_SIZES = [12, 14, 15, 14, 12, 9, 6, 4, 3, 2, 1, 1];
+
 class Ripple {
     constructor(x, y, power) {
         this.x = x;
@@ -147,6 +155,7 @@ class Koi {
         }
         this.angle = Math.atan2(this.vy, this.vx);
         this.swimCycle = Math.random() * Math.PI * 2;
+        this.fedTimer = 0;
     }
 
     updateColorTheme() {
@@ -162,12 +171,14 @@ class Koi {
     }
 
     update() {
+        if (this.fedTimer > 0) this.fedTimer--;
+
         let target = null;
-        let minDist = Infinity;
+        let minDistSq = Infinity;
         for (let i = 0; i < foods.length; i++) {
-            let d = distance(this, foods[i]);
-            if (d < minDist) {
-                minDist = d;
+            let dSq = distanceSq(this, foods[i]);
+            if (dSq < minDistSq) {
+                minDistSq = dSq;
                 target = foods[i];
             }
         }
@@ -176,7 +187,7 @@ class Koi {
         let effectiveBaseSpeed = this.baseSpeed * config.fishSpeed;
         let avoidForceApplied = false;
 
-        if (target && minDist < 300) {
+        if (target && minDistSq < 90000) {
             let truedirX = target.x - this.x;
             let truedirY = target.y - this.y;
             let dirLen = Math.sqrt(truedirX * truedirX + truedirY * truedirY);
@@ -188,14 +199,15 @@ class Koi {
                 ay = (desiredY - this.vy) * this.maxForce * 2;
             }
             
-            if (minDist < 20) {
+            if (minDistSq < 400) {
                 foods.splice(foods.indexOf(target), 1);
                 ripples.push(new Ripple(this.x, this.y, 0.8 * config.rippleStrength));
+                this.fedTimer = 180;
             }
         } else {
-            if (config.shyFish && mouse.active) {
-                let dMouse = distance(this, mouse);
-                if (dMouse < 200) {
+            if (this.fedTimer <= 0 && config.shyFish && mouse.active) {
+                let dMouseSq = distanceSq(this, mouse);
+                if (dMouseSq < 40000) {
                     let avoidX = this.x - mouse.x;
                     let avoidY = this.y - mouse.y;
                     let avoidLen = Math.sqrt(avoidX * avoidX + avoidY * avoidY);
@@ -234,7 +246,7 @@ class Koi {
         let cSpeed = Math.sqrt(speedSquared);
         
         let currentMax = effectiveBaseSpeed;
-        if (target && minDist < 300) {
+        if (target && minDistSq < 90000) {
             currentMax = effectiveBaseSpeed * 2;
         } else if (avoidForceApplied) {
             currentMax = effectiveBaseSpeed * 2.5;
@@ -256,6 +268,7 @@ class Koi {
         this.segments[0].x = this.x;
         this.segments[0].y = this.y;
         
+        let currentSpacing = 5 * config.fishSize;
         for (let i = 1; i < this.numSegments; i++) {
             let prev = this.segments[i - 1];
             let curr = this.segments[i];
@@ -264,8 +277,7 @@ class Koi {
             let dy = prev.y - curr.y;
             let dist = Math.sqrt(dx * dx + dy * dy);
             
-            let currentSpacing = 5 * config.fishSize;
-            if (dist > currentSpacing) {
+            if (dist > 0) {
                 curr.x = prev.x - (dx / dist) * currentSpacing;
                 curr.y = prev.y - (dy / dist) * currentSpacing;
             }
@@ -273,9 +285,6 @@ class Koi {
     }
 
     draw(ctx) {
-        const baseSizes = [12, 14, 15, 14, 12, 9, 6, 4, 3, 2, 1, 1];
-        const sizes = baseSizes.map(s => s * config.fishSize);
-        
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
 
@@ -316,7 +325,7 @@ class Koi {
             ctx.beginPath();
             ctx.moveTo(s1.x, s1.y);
             ctx.lineTo(s2.x, s2.y);
-            ctx.lineWidth = sizes[i] * 2;
+            ctx.lineWidth = FISH_BASE_SIZES[i] * config.fishSize * 2;
             
             ctx.strokeStyle = (i === 4 || i === 7) ? this.spotColor : this.color;
             
@@ -324,7 +333,7 @@ class Koi {
         }
 
         ctx.beginPath();
-        ctx.arc(this.segments[0].x, this.segments[0].y, sizes[0] * 0.8, 0, Math.PI * 2);
+        ctx.arc(this.segments[0].x, this.segments[0].y, FISH_BASE_SIZES[0] * config.fishSize * 0.8, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
         ctx.fill();
 
