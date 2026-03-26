@@ -4,7 +4,7 @@ An interactive, highly aesthetic Koi Pond. Move your mouse to create ripples and
 
 ## 🎥 Preview
 
-[![Koi Pond Wallpaper Demo](https://img.youtube.com/vi/0NkA6I73C5Q/maxresdefault.jpg)](https://www.youtube.com/watch?v=0NkA6I73C5Q)
+![Koi Pond Preview](https://i.ibb.co.com/qF0ygzk4/koi-pond-preview.gif)
 
 ## 🌟 Features
 
