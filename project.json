@@ -1,81 +1,125 @@
 {
-  "title": "Koi Pond",
-  "type": "web",
-  "file": "index.html",
-  "contentrating": "Everyone",
-  "preview": "preview.jpg",
-  "description": "An interactive, deeply relaxing Koi Pond. Move your cursor to create ripples, watch the fish scatter, or click to feed them!",
-  "general": {
-    "properties": {
-      "fishCount": {
-        "text": "Number of Koi",
-        "type": "slider",
-        "value": 15,
-        "min": 5,
-        "max": 50,
-        "order": 1
-      },
-      "fishTheme": {
-        "text": "Fish Color Theme",
-        "type": "combo",
-        "value": 0,
-        "options": [
-          {"label": "Traditional", "value": 0},
-          {"label": "Neon", "value": 1},
-          {"label": "Monochrome", "value": 2}
-        ],
-        "order": 2
-      },
-      "fishSize": {
-        "text": "Fish Size Multiplier",
-        "type": "slider",
-        "value": 1.0,
-        "min": 0.5,
-        "max": 3.0,
-        "order": 3
-      },
-      "fishSpeed": {
-        "text": "Fish Speed Multiplier",
-        "type": "slider",
-        "value": 1.0,
-        "min": 0.5,
-        "max": 3.0,
-        "order": 4
-      },
-      "waterHue": {
-        "text": "Water Color Hue",
-        "type": "slider",
-        "value": 195,
-        "min": 0,
-        "max": 360,
-        "order": 5
-      },
-      "enableCaustics": {
-        "text": "Enable Light Caustics",
-        "type": "bool",
-        "value": true,
-        "order": 6
-      },
-      "rippleStrength": {
-        "text": "Ripple Strength",
-        "type": "slider",
-        "value": 1.0,
-        "min": 0.1,
-        "max": 5.0,
-        "order": 7
-      },
-      "enableFeeding": {
-        "text": "Enable Feeding on Click",
-        "type": "bool",
-        "value": true,
-        "order": 8
-      },
-      "shyFish": {
-        "text": "Fish Avoid Cursor (Shy)",
-        "type": "bool",
-        "value": true,
-        "order": 9
-      }
-    }
-  }
+	"contentrating" : "Everyone",
+	"description" : "An interactive, deeply relaxing Koi Pond. Move your cursor to create ripples, watch the fish scatter, or click to feed them!\r\n\r\n[h2]Features[/h2]\r\n\r\n[list]\r\n[*] [b]Interactive Environment:[/b] Move your cursor to create dynamic ripples.\r\n[*] [b]Feed the Koi:[/b] Click to drop food for the fish to seek out.\r\n[*] [b]Shy Fish:[/b] Fish naturally scatter and avoid your cursor.\r\n[*] [b]Procedural Animation:[/b] Realistic segment-based fish movement.\r\n[*] [b]Aesthetic Caustics:[/b] Procedural light patterns synced to the water and fish.\r\n[/list]\r\n\r\n[hr][/hr]\r\n\r\n[h2]Highly Customizable[/h2]\r\nAdjust Wallpaper Engine properties to fit your setup:\r\n\r\n[list]\r\n[*] [b]Koi Customization:[/b] Count, speed, and size.\r\n[*] [b]Water Color:[/b] Adjustable hue.\r\n[*] [b]Fish Color Themes:[/b] Traditional, Neon, and Monochrome.\r\n[*] [b]Toggles:[/b] Caustics, feeding, and shy fish behavior.\r\n[*] [b]Physics:[/b] Ripple strength.\r\n[/list]\r\n\r\n[hr][/hr]\r\n[i]If you enjoy this wallpaper, please consider leaving a rating![/i]",
+	"file" : "index.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"enableCaustics" : 
+			{
+				"index" : 5,
+				"order" : 105,
+				"text" : "Enable Light Caustics",
+				"type" : "bool",
+				"value" : true
+			},
+			"enableFeeding" : 
+			{
+				"index" : 7,
+				"order" : 107,
+				"text" : "Enable Feeding on Click",
+				"type" : "bool",
+				"value" : true
+			},
+			"fishCount" : 
+			{
+				"index" : 0,
+				"max" : 50,
+				"min" : 5,
+				"order" : 100,
+				"text" : "Number of Koi",
+				"type" : "slider",
+				"value" : 15
+			},
+			"fishSize" : 
+			{
+				"index" : 2,
+				"max" : 3,
+				"min" : 0.5,
+				"order" : 102,
+				"text" : "Fish Size Multiplier",
+				"type" : "slider",
+				"value" : 1
+			},
+			"fishSpeed" : 
+			{
+				"index" : 3,
+				"max" : 3,
+				"min" : 0.5,
+				"order" : 103,
+				"text" : "Fish Speed Multiplier",
+				"type" : "slider",
+				"value" : 1
+			},
+			"fishTheme" : 
+			{
+				"index" : 1,
+				"options" : 
+				[
+					{
+						"label" : "Traditional",
+						"value" : 0
+					},
+					{
+						"label" : "Neon",
+						"value" : 1
+					},
+					{
+						"label" : "Monochrome",
+						"value" : 2
+					}
+				],
+				"order" : 101,
+				"text" : "Fish Color Theme",
+				"type" : "combo",
+				"value" : 0
+			},
+			"rippleStrength" : 
+			{
+				"index" : 6,
+				"max" : 5,
+				"min" : 0.1,
+				"order" : 106,
+				"text" : "Ripple Strength",
+				"type" : "slider",
+				"value" : 1
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"shyFish" : 
+			{
+				"index" : 8,
+				"order" : 108,
+				"text" : "Fish Avoid Cursor (Shy)",
+				"type" : "bool",
+				"value" : true
+			},
+			"waterHue" : 
+			{
+				"index" : 4,
+				"max" : 360,
+				"min" : 0,
+				"order" : 104,
+				"text" : "Water Color Hue",
+				"type" : "slider",
+				"value" : 195
+			}
+		}
+	},
+	"preview" : "preview.gif",
+	"ratingsex" : "none",
+	"ratingviolence" : "none",
+	"tags" : [ "Relaxing" ],
+	"title" : "Koi Pond",
+	"type" : "web",
+	"version" : 1,
+	"visibility" : "public",
+	"workshopid" : "3692215641",
+	"workshopurl" : "steam://url/CommunityFilePage/3692215641"
 }
