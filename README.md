@@ -1,6 +1,6 @@
 # Koi Pond 🐟
 
-An interactive, highly aesthetic Koi Pond. Move your mouse to create ripples and click to feed the fish!
+An interactive, deeply relaxing Koi Pond. Move your cursor to create ripples, watch the fish scatter, or click to feed them!
 
 ## 🎥 Preview
 

@@ -234,6 +234,11 @@ class Koi {
 
         let margin = 100;
         let turn = 0.1;
+        
+        if (target && minDistSq < 90000) {
+            margin = 0;
+        }
+
         if (this.x < margin) ax += turn;
         if (this.x > width - margin) ax -= turn;
         if (this.y < margin) ay += turn;
