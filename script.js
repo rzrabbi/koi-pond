@@ -79,6 +79,31 @@ window.wallpaperPropertyListener = {
     }
 };
 
+function livelyPropertyListener(name, val) {
+    if (name === "fishCount") {
+        config.fishCount = val;
+        syncKois();
+    } else if (name === "waterHue") {
+        config.waterHue = val;
+        document.body.style.backgroundColor = `hsl(${config.waterHue}, 75%, 18%)`;
+    } else if (name === "fishSpeed") {
+        config.fishSpeed = val;
+    } else if (name === "enableCaustics") {
+        config.enableCaustics = val;
+    } else if (name === "enableFeeding") {
+        config.enableFeeding = val;
+    } else if (name === "shyFish") {
+        config.shyFish = val;
+    } else if (name === "fishTheme") {
+        config.fishTheme = val;
+        kois.forEach(k => k.updateColorTheme());
+    } else if (name === "fishSize") {
+        config.fishSize = val;
+    } else if (name === "rippleStrength") {
+        config.rippleStrength = val;
+    }
+}
+
 function distance(a, b) {
     let dx = a.x - b.x;
     let dy = a.y - b.y;
@@ -411,3 +436,10 @@ function render() {
 }
 
 render();
+
+// Lively Wallpaper Support
+function livelyPropertyListener(name, val) {
+    const props = {};
+    props[name] = { value: val };
+    window.wallpaperPropertyListener.applyUserProperties(props);
+}
