@@ -2,10 +2,7 @@
 
 An interactive, deeply relaxing Koi Pond live wallpaper for Wallpaper Engine and Lively Wallpaper. Move your cursor to create ripples, watch the fish scatter, or click to feed them!
 
-
-![Steam Subscriptions](https://img.shields.io/steam/subscriptions/3692215641?style=for-the-badge&logo=steam&color=blue)
-
-
+[![Steam Subscriptions](https://img.shields.io/steam/subscriptions/3692215641?style=for-the-badge&logo=steam&color=blue)](https://steamcommunity.com/sharedfiles/filedetails/?id=3692215641)
 
 ## 🎥 Preview
 
